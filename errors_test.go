@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"testing"
 
+	"github.com/Eyal-Shalev/bitmap-go/v1"
 	"github.com/stretchr/testify/assert"
 )
 
