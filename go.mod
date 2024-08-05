@@ -1,4 +1,4 @@
-module github.com/Eyal-Shalev/bitmap-go/v0
+module github.com/Eyal-Shalev/bitmap-go
 
 go 1.21
 
