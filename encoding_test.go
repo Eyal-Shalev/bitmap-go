@@ -5,7 +5,7 @@ import (
 	"encoding/json"
 	"testing"
 
-	"github.com/Eyal-Shalev/bitmap-go/v1"
+	"github.com/Eyal-Shalev/bitmap-go/v0"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
