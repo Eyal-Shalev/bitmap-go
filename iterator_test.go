@@ -10,7 +10,7 @@ import (
 )
 
 func TestBitMap_Iter(t *testing.T) {
-	bm := slices.Clone(exampleSmall)
+	bm := exampleSmall.Clone()
 	idx := 0
 	for isSet := range bm.Iter() {
 		assert.Equal(t, slices.Contains(exampleSmallSetPositions, idx), isSet)
@@ -19,7 +19,7 @@ func TestBitMap_Iter(t *testing.T) {
 }
 
 func TestBitMap_Iter2(t *testing.T) {
-	bm := slices.Clone(exampleSmall)
+	bm := exampleSmall.Clone()
 	for idx, isSet := range bm.Iter2() {
 		assert.Equal(t, slices.Contains(exampleSmallSetPositions, idx), isSet)
 	}

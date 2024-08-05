@@ -38,7 +38,7 @@ func orFn(_ int, isSet bool, Accumulator bool) bool {
 
 func TestReduceWithInit(t *testing.T) {
 	type args[T any] struct {
-		bm      bitmap.BitMap
+		bm      *bitmap.BitMap
 		f       bitmap.ReduceFunc[T]
 		initial bool
 	}
@@ -51,7 +51,7 @@ func TestReduceWithInit(t *testing.T) {
 		{
 			name: "reduceWithInit(0, andFn, false)",
 			args: args[bool]{
-				bm:      bitmap.BitMap{0},
+				bm:      bitmap.NewFromBytes([]byte{0}),
 				f:       andFn,
 				initial: false,
 			},
@@ -60,7 +60,7 @@ func TestReduceWithInit(t *testing.T) {
 		{
 			name: "reduceWithInit(1, andFn, false)",
 			args: args[bool]{
-				bm:      bitmap.BitMap{255},
+				bm:      bitmap.NewFromBytes([]byte{255}),
 				f:       andFn,
 				initial: false,
 			},
@@ -69,7 +69,7 @@ func TestReduceWithInit(t *testing.T) {
 		{
 			name: "reduceWithInit(0, andFn, true)",
 			args: args[bool]{
-				bm:      bitmap.BitMap{0},
+				bm:      bitmap.NewFromBytes([]byte{0}),
 				f:       andFn,
 				initial: true,
 			},
@@ -78,7 +78,7 @@ func TestReduceWithInit(t *testing.T) {
 		{
 			name: "reduceWithInit(255, andFn, true)",
 			args: args[bool]{
-				bm:      bitmap.BitMap{255},
+				bm:      bitmap.NewFromBytes([]byte{255}),
 				f:       andFn,
 				initial: true,
 			},
@@ -87,7 +87,7 @@ func TestReduceWithInit(t *testing.T) {
 		{
 			name: "reduceWithInit(0, orFn, false)",
 			args: args[bool]{
-				bm:      bitmap.BitMap{0},
+				bm:      bitmap.NewFromBytes([]byte{0}),
 				f:       orFn,
 				initial: false,
 			},
@@ -96,7 +96,7 @@ func TestReduceWithInit(t *testing.T) {
 		{
 			name: "reduceWithInit(1, orFn, false)",
 			args: args[bool]{
-				bm:      bitmap.BitMap{1},
+				bm:      bitmap.NewFromBytes([]byte{1}),
 				f:       orFn,
 				initial: false,
 			},
@@ -105,7 +105,7 @@ func TestReduceWithInit(t *testing.T) {
 		{
 			name: "reduceWithInit(0, orFn, true)",
 			args: args[bool]{
-				bm:      bitmap.BitMap{0},
+				bm:      bitmap.NewFromBytes([]byte{0}),
 				f:       orFn,
 				initial: true,
 			},
@@ -114,7 +114,7 @@ func TestReduceWithInit(t *testing.T) {
 		{
 			name: "reduceWithInit(255, orFn, true)",
 			args: args[bool]{
-				bm:      bitmap.BitMap{1},
+				bm:      bitmap.NewFromBytes([]byte{1}),
 				f:       orFn,
 				initial: true,
 			},

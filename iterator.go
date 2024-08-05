@@ -6,7 +6,7 @@ import (
 	"iter"
 )
 
-func (bm BitMap) Iter() iter.Seq[bool] {
+func (bm *BitMap) Iter() iter.Seq[bool] {
 	return func(yield func(bool) bool) {
 		for idx := 0; idx < bm.Length(); idx++ {
 			isSet, _ := bm.IsSet(idx)
@@ -17,7 +17,7 @@ func (bm BitMap) Iter() iter.Seq[bool] {
 	}
 }
 
-func (bm BitMap) Iter2() iter.Seq2[int, bool] {
+func (bm *BitMap) Iter2() iter.Seq2[int, bool] {
 	return func(yield func(int, bool) bool) {
 		for idx := 0; idx < bm.Length(); idx++ {
 			isSet, _ := bm.IsSet(idx)

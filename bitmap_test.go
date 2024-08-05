@@ -10,13 +10,10 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-var exampleSmall = bitmap.BitMap{0b00000000, 0b10000000, 0b01000000, 0b00100000, 0b00010000, 0b00001000, 0b00000100, 0b00000010, 0b00000001}
+var exampleSmall = bitmap.NewFromBytes([]byte{0b00000000, 0b10000000, 0b01000000, 0b00100000, 0b00010000, 0b00001000, 0b00000100, 0b00000010, 0b00000001})
 var exampleSmallSetPositions = []int{8 * 1, 8*2 + 1, 8*3 + 2, 8*4 + 3, 8*5 + 4, 8*6 + 5, 8*7 + 6, 8*8 + 7}
 
-var exampleRandom = bitmap.BitMap{
-	0b00101010,
-	0b01000101,
-}
+var exampleRandom = bitmap.NewFromBytes([]byte{0b00101010, 0b01000101})
 var exampleRandomSetPositions = []int{2, 4, 6, 8*1 + 1, 8*1 + 5, 8*1 + 7}
 
 func ExampleBitMap_String() {
@@ -60,11 +57,11 @@ func TestBitMap_Set(t *testing.T) {
 }
 
 func TestBitMap_UnSet(t *testing.T) {
-	bm := slices.Clone(exampleRandom)
+	bm := exampleRandom.Clone()
 	for _, idx := range exampleRandomSetPositions {
 		require.NoError(t, bm.UnSet(idx))
 	}
-	assert.EqualValues(t, bitmap.BitMap{0b00000000, 0b00000000}, bm)
+	assert.EqualValues(t, bitmap.NewFromBytes([]byte{0b00000000, 0b00000000}), bm)
 }
 
 func TestBitMap_SetVal(t *testing.T) {
@@ -83,11 +80,11 @@ func TestBitMap_SetVal(t *testing.T) {
 	for _, idx := range exampleRandomSetPositions {
 		require.NoError(t, bm.SetVal(idx, false))
 	}
-	assert.EqualValues(t, bitmap.BitMap{0b00000000, 0b00000000}, bm)
+	assert.EqualValues(t, bitmap.NewFromBytes([]byte{0b00000000, 0b00000000}), bm)
 }
 
 func TestBitMap_Length(t *testing.T) {
-	assert.Equal(t, 0, bitmap.BitMap(nil).Length())
+	assert.Equal(t, 0, (*bitmap.BitMap)(nil).Length())
 	assert.Equal(t, 8*2, exampleRandom.Length())
 	assert.Equal(t, 8*9, exampleSmall.Length())
 }
