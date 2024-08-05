@@ -3,7 +3,6 @@ package bitmap_test
 import (
 	"testing"
 
-	"github.com/Eyal-Shalev/bitmap-go"
 	"github.com/stretchr/testify/assert"
 )
 

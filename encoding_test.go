@@ -3,10 +3,10 @@ package bitmap_test
 import (
 	"encoding/base64"
 	"encoding/json"
-	"github.com/Eyal-Shalev/bitmap-go"
+	"testing"
+
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"testing"
 )
 
 func TestBitMap_BinaryMarshaller(t *testing.T) {
