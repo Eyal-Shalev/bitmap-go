@@ -21,12 +21,15 @@ func TestBitMap_BinaryMarshaller(t *testing.T) {
 
 func TestBitMap_jsonMarshaller(t *testing.T) {
 	const msgStr = `Hello World`
-	msgBase64 := base64.StdEncoding.EncodeToString([]byte(msgStr))
-	msgBM, err := bitmap.NewFromBytes([]byte(msgStr), 0)
+	expectedMsgBytes := []byte{5}
+	expectedMsgBytes = append(expectedMsgBytes, []byte(msgStr)...)
+	expectedMsgBytes = append(expectedMsgBytes, 0)
+	msgBase64 := base64.StdEncoding.EncodeToString(expectedMsgBytes)
+	msgBM, err := bitmap.NewFromBytes([]byte(msgStr), 5)
 	require.NoError(t, err)
 	jsonStr, err := json.Marshal(msgBM)
 	require.NoError(t, err)
-	assert.Equal(t, jsonStr, []byte(`"`+msgBase64+`"`))
+	assert.Equal(t, string(jsonStr), `"`+msgBase64+`"`)
 	var result bitmap.BitMap
 	require.NoError(t, json.Unmarshal(jsonStr, &result))
 	assert.Equal(t, msgBM, &result)
