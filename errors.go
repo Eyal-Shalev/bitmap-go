@@ -39,11 +39,7 @@ type InvalidLengthError struct {
 }
 
 func (e *InvalidLengthError) Error() string {
-	prefix := fmt.Sprintf("bitmap.InvalidLengthError{Length: %d}: ", e.Length)
-	if e.Length < 0 {
-		return prefix + "Length must be larger than 0"
-	}
-	return prefix + "Length must be a multiple of 8"
+	return fmt.Sprintf("bitmap.InvalidLengthError{Length: %d}: Length must be larger than 0", e.Length)
 }
 
 func (e *InvalidLengthError) Unwrap() error {
@@ -53,6 +49,27 @@ func (e *InvalidLengthError) Unwrap() error {
 func (e *InvalidLengthError) Is(other error) bool {
 	switch other.(type) {
 	case *InvalidLengthError:
+		return true
+	default:
+		return other == Error
+	}
+}
+
+type InvalidPaddingError struct {
+	Padding int
+}
+
+func (e *InvalidPaddingError) Error() string {
+	return fmt.Sprintf("bitmap.InvalidPaddingError{Padding: %d}: Padding must be between -8 and 8", e.Padding)
+}
+
+func (e *InvalidPaddingError) Unwrap() error {
+	return Error
+}
+
+func (e *InvalidPaddingError) Is(other error) bool {
+	switch other.(type) {
+	case *InvalidPaddingError:
 		return true
 	default:
 		return other == Error

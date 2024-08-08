@@ -4,6 +4,7 @@ import (
 	"testing"
 
 	"github.com/Eyal-Shalev/bitmap-go"
+	"github.com/dottedmag/must"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -51,7 +52,7 @@ func TestReduceWithInit(t *testing.T) {
 		{
 			name: "reduceWithInit(0, andFn, false)",
 			args: args[bool]{
-				bm:      bitmap.NewFromBytes([]byte{0}),
+				bm:      must.OK1(bitmap.NewFromBytes([]byte{0}, 0)),
 				f:       andFn,
 				initial: false,
 			},
@@ -60,7 +61,7 @@ func TestReduceWithInit(t *testing.T) {
 		{
 			name: "reduceWithInit(1, andFn, false)",
 			args: args[bool]{
-				bm:      bitmap.NewFromBytes([]byte{255}),
+				bm:      must.OK1(bitmap.NewFromBytes([]byte{255}, 0)),
 				f:       andFn,
 				initial: false,
 			},
@@ -69,7 +70,7 @@ func TestReduceWithInit(t *testing.T) {
 		{
 			name: "reduceWithInit(0, andFn, true)",
 			args: args[bool]{
-				bm:      bitmap.NewFromBytes([]byte{0}),
+				bm:      must.OK1(bitmap.NewFromBytes([]byte{0}, 0)),
 				f:       andFn,
 				initial: true,
 			},
@@ -78,7 +79,7 @@ func TestReduceWithInit(t *testing.T) {
 		{
 			name: "reduceWithInit(255, andFn, true)",
 			args: args[bool]{
-				bm:      bitmap.NewFromBytes([]byte{255}),
+				bm:      must.OK1(bitmap.NewFromBytes([]byte{255}, 0)),
 				f:       andFn,
 				initial: true,
 			},
@@ -87,7 +88,7 @@ func TestReduceWithInit(t *testing.T) {
 		{
 			name: "reduceWithInit(0, orFn, false)",
 			args: args[bool]{
-				bm:      bitmap.NewFromBytes([]byte{0}),
+				bm:      must.OK1(bitmap.NewFromBytes([]byte{0}, 0)),
 				f:       orFn,
 				initial: false,
 			},
@@ -96,7 +97,7 @@ func TestReduceWithInit(t *testing.T) {
 		{
 			name: "reduceWithInit(1, orFn, false)",
 			args: args[bool]{
-				bm:      bitmap.NewFromBytes([]byte{1}),
+				bm:      must.OK1(bitmap.NewFromBytes([]byte{1}, 0)),
 				f:       orFn,
 				initial: false,
 			},
@@ -105,7 +106,7 @@ func TestReduceWithInit(t *testing.T) {
 		{
 			name: "reduceWithInit(0, orFn, true)",
 			args: args[bool]{
-				bm:      bitmap.NewFromBytes([]byte{0}),
+				bm:      must.OK1(bitmap.NewFromBytes([]byte{0}, 0)),
 				f:       orFn,
 				initial: true,
 			},
@@ -114,7 +115,7 @@ func TestReduceWithInit(t *testing.T) {
 		{
 			name: "reduceWithInit(255, orFn, true)",
 			args: args[bool]{
-				bm:      bitmap.NewFromBytes([]byte{1}),
+				bm:      must.OK1(bitmap.NewFromBytes([]byte{1}, 0)),
 				f:       orFn,
 				initial: true,
 			},
