@@ -81,6 +81,9 @@ func (bm *BitMap) Set(idx int) error {
 	if err != nil {
 		return err
 	}
+	if bm.data[pos]&mask == mask {
+		return nil
+	}
 	bm.data[pos] = bm.data[pos] | mask
 	return nil
 }
@@ -89,6 +92,9 @@ func (bm *BitMap) UnSet(idx int) error {
 	pos, mask, err := bm.calcPosAndMask(idx)
 	if err != nil {
 		return err
+	}
+	if bm.data[pos]&mask != mask {
+		return nil
 	}
 	bm.data[pos] = bm.data[pos] ^ mask
 	return nil
